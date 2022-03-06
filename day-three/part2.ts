@@ -1,34 +1,26 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path'; 
 
-/**
-* @param {string} input
-* @return {string[]}
-*/
-function processInput(input) {
+interface Partition {0: string[], 1: string[]}
+interface CommonValue {
+    mostCommonValue: string,
+    leastCommonValue: string
+} 
+
+function processInput(input : string) {
     return input.split(/\s+/).filter((bits) => bits);
 }
 
-/**
-* @param {string[]} bitList
-* @param {number} i
-* @returns {{0: string[], 1: string[]}}
-*/ 
-function partitionByBit(bitList, i) {
-    let partition = {0: [], 1: []};
+function partitionByBit(bitList : string[], i : number) {
+    let partition : Partition = {0: [], 1: []};
     
-    for(const bits of bitList) {
-        partition[bits[i]].push(bits);
-    }
+    for(const bits of bitList)
+        partition[bits[i] as ('0' | '1')].push(bits);
 
     return partition;
 }
 
-/**
-* @param {string[]} bitList
-* @returns {{mostCommonValue: string, leastCommonValue: string}}
-*/   
-function processValues(bitList) {
+function processValues(bitList : string[]) : CommonValue {
     const size = bitList[0].length; 
     let leastCommonList = [...bitList];
     let mostCommonList = [...bitList];
@@ -38,16 +30,16 @@ function processValues(bitList) {
 
         if(leastCommonList.length > 1) {
             const partition = partitionByBit(leastCommonList, i);
-            const leastCommonPartition = (partition[0].length > partition[1].length) | 0
+            const leastCommonPartition = +(partition[0].length > partition[1].length);
 
-            leastCommonList = partition[leastCommonPartition]; 
+            leastCommonList = partition[leastCommonPartition as (0 | 1)]; 
         }
 
         if(mostCommonList.length > 1) {
             const partition = partitionByBit(mostCommonList, i);
-            const mostCommonPartition = (partition[0].length <= partition[1].length) | 0
+            const mostCommonPartition = +(partition[0].length <= partition[1].length);
 
-            mostCommonList = partition[mostCommonPartition]; 
+            mostCommonList = partition[mostCommonPartition as (0 | 1)]; 
         }
     }
 
@@ -57,10 +49,7 @@ function processValues(bitList) {
     }; 
 }
 
-/**
- * @param {string} input 
- */
-function dayThree(input) {
+function dayThree(input : string) {
     const bitList = processInput(input);
 
     const {mostCommonValue, leastCommonValue} = processValues(bitList);

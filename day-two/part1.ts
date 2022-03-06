@@ -1,19 +1,18 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+
+type Direction = 'forward' | 'up' | 'down';
+type Command = `${Direction} ${number}`;
 
 const commands = {
-    forward: (factor) => [factor, 0],
-    up: (factor) => [0, -factor],
-    down: (factor) => [0, factor]
+    forward: (factor : number) => [factor, 0] as const,
+    up: (factor : number) => [0, -factor] as const,
+    down: (factor : number) => [0, factor] as const
 }
 
-/**
- * 
- * @param {string[]} input
- */
-function dayTwo(input) {
+function dayTwo(input : Command[]) {
     const [horizontal, depth] = input.reduce((acc, command) => {
-        const [direction, factor] = command.split(/\s/g);
+        const [direction, factor] = command.split(/\s/g) as [Direction, string];
         const [h, d] = commands[direction](+factor) || [0, 0];
 
         acc[0] += h;
@@ -25,7 +24,7 @@ function dayTwo(input) {
     return horizontal * depth; 
 }
 
-const testInput = [
+const testInput : Command[] = [
     "forward 5",
     "down 5",
     "forward 8",
@@ -36,7 +35,7 @@ const testInput = [
 const mainInput = fs.readFileSync(
     path.join(__dirname, 'input1.txt'),
     {encoding: 'utf-8'}
-).split('\n');
+).split('\n') as Command[];
 
 console.log(dayTwo(testInput));
 console.log(dayTwo(mainInput));

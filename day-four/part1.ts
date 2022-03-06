@@ -1,18 +1,26 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path'; 
 
-/**
-* @param {string[]} input
-* @return {{boards: Object[], callNumbers: number[]}}
-*/
-function processInput(input) {
+interface Board {
+    [index : number]: Set<number>
+}
+interface BingoGame {
+    boards: Board[],
+    callNumbers: number[]
+}
+interface BingoGameResults {
+    winningBoard: Board,
+    lastCall: number
+}
+
+function processInput(input : string[]) : BingoGame {
     const callNumbers = input[0].split(',').map((n) => +n);
-    const boards = [];
+    const boards : Board[] = [];
 
     input.slice(1).forEach((row, i) => {
         const offset = i % 5;
         const board = boards[(i / 5)|0] || {};
-        const rowSet = row.match(/\d+/g).map((n) => +n);
+        const rowSet = row.match(/\d+/g)?.map((n) => +n) || [];
 
         board[offset] = new Set(rowSet);
 
@@ -28,12 +36,7 @@ function processInput(input) {
     return {boards, callNumbers};
 }
 
-/**
-* @param {Object[]} boards
-* @param {number} num
-* @return {Object}
-*/  
-function searchBoards(boards, num) {
+function searchBoards(boards : Board[], num : number) {
     for(let board of boards) {
        for(let i in board) {
            let combo = board[i];
@@ -46,12 +49,7 @@ function searchBoards(boards, num) {
     return null;
 }
 
-/**
-* @param {Object[]} boards
-* @param {number[]} callNumbers
-* @return {{winningBoard: Object, lastCall: number}}
-*/  
-function playBingo(boards, callNumbers) {
+function playBingo(boards : Board[], callNumbers : number[]) : BingoGameResults {
     for(let num of callNumbers) {
         const winningBoard = searchBoards(boards, num);
 
@@ -62,11 +60,7 @@ function playBingo(boards, callNumbers) {
     return {winningBoard: {}, lastCall: callNumbers.slice(-1)[0]};
 }
 
-/**
-* @param {Object[]} board
-* @return {number}
-*/  
-function sumBoard(board) {
+function sumBoard(board : Board) {
     let sum = 0; 
 
     for(let i = 0; i < 5; i++) {
@@ -80,10 +74,7 @@ function sumBoard(board) {
     return sum;
 }
 
-/**
-* @param {string[]} input
-*/
-function dayFour(input) {
+function dayFour(input : string[]) {
     const {boards, callNumbers} = processInput(input);
     const {winningBoard, lastCall} = playBingo(boards, callNumbers);
     const winningBoardSum = sumBoard(winningBoard);

@@ -1,23 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-/**
- * 
- * @param {number[]} depths 
- * @param {number} depths 
- */
-function getNumIncreases(depths) {
+function getNumIncreases(depths : number[]) {
     return depths.slice(1).reduce((acc, cur, i) => (
         depths[i] < cur ? acc + 1 : acc
     ), 0);
 }
 
-/**
- * 
- * @param {number[]} depths
- * @returns {number[]} 
- */
-function getWindowSums(depths, n) {
+function getWindowSums(depths : number[], n : number) : number[] {
     const sums = [...Array(depths.length - n + 1)];
 
     for(const i in sums) {
@@ -32,12 +22,7 @@ function getWindowSums(depths, n) {
    return sums;
 }
 
-/**
- * 
- * @param {number[]} depths 
- * @returns {number}
- */
-function dayOne(depths) {
+function dayOne(depths : number[]) {
     const numericalDepths = getWindowSums(depths, 3);
     return getNumIncreases(numericalDepths);
 }

@@ -1,14 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-/**
- * 
- * @param {string} input
- * @return {string[]}
- */
-function processInput(input) {
-    let bitList = [];
-    let size = input.match(/\d+/)[0].length;
+interface CommonBits {
+    mostCommonBits: string,
+    leastCommonBits: string
+}
+
+function processInput(input : string) {
+    let bitList : string[] = [];
+    let size = input.match(/\d+/)?.[0]?.length || 0;
 
     for (let i = 0; i < size; i++) {
         const previousBits = '.'.repeat(i);
@@ -20,12 +20,7 @@ function processInput(input) {
     return bitList;
 }
 
-/**
- * 
- * @param {string[]} bitList 
- * @returns {{mostCommonBits: string, leastCommonBits: string}}
- */
-function getCommonBits(bitList) {
+function getCommonBits(bitList : string[]) : CommonBits {
     let mostCommonBits = '';
     let leastCommonBits = '';
     
@@ -34,18 +29,14 @@ function getCommonBits(bitList) {
         const numZeros = bits.length - numOnes;
         const commonBitIndex = numOnes > numZeros;
 
-        mostCommonBits += [0, 1][commonBitIndex | 0];
-        leastCommonBits += [0, 1][!commonBitIndex | 0];
+        mostCommonBits += ['0', '1'][+commonBitIndex];
+        leastCommonBits += ['0', '1'][+!commonBitIndex];
     }
 
     return {mostCommonBits, leastCommonBits};
 }
 
-/**
- * 
- * @param {string} input 
- */
-function dayThree(input) {
+function dayThree(input : string) {
     const bitList = processInput(input);
     const {mostCommonBits, leastCommonBits} = getCommonBits(bitList);
 

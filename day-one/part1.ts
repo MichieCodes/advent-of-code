@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-/**
- * 
- * @param {number[]} depths 
- */
-function dayOne(depths) {
+function dayOne(depths : number[]) {
     return depths.slice(1).reduce((acc, cur, i) => (
         depths[i] < cur ? acc + 1 : acc
     ), 0);
