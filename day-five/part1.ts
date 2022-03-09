@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path'; 
 
 function dayFive(input : string[]) {
-    //
 }
 
 const testInput = fs.readFileSync(
