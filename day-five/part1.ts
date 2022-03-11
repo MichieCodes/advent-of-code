@@ -7,12 +7,12 @@ function dayFive(input : string[]) {
 const testInput = fs.readFileSync(
     path.join(__dirname, 'test.txt'),
     {encoding: 'utf-8'}
-).split(/\r?\n\r?\n?/);
+).split('\n');
 
 const mainInput = fs.readFileSync(
     path.join(__dirname, 'input1.txt'),
     {encoding: 'utf-8'}
-).split(/\r?\n\r?\n?/); 
+).split('\n'); 
 
 console.log(dayFive(testInput));
 console.log(dayFive(mainInput));
