@@ -11,9 +11,10 @@
       "configuration": {
         "request": "launch",
         "protocol": "auto",
+        "runtimeArgs": ["-r", "ts-node/register"],
+        "args": ["${workspaceRoot}/part2.ts"],
         "stopOnEntry": true,
         "console": "integratedTerminal",
-        "program": "${workspaceRoot}/part2.js",
         "cwd": "${workspaceRoot}"
       }
     }

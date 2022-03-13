@@ -11,9 +11,10 @@
       "configuration": {
         "request": "launch",
         "protocol": "auto",
+        "runtimeArgs": ["-r", "ts-node/register"],
+        "args": ["${workspaceRoot}/part1.ts"],
         "stopOnEntry": true,
         "console": "integratedTerminal",
-        "program": "${workspaceRoot}/part1.ts",
         "cwd": "${workspaceRoot}"
       }
     }
