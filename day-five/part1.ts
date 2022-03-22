@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path'; 
 
+function processInput(input : string[]) {
+}
+
 function dayFive(input : string[]) {
 }
 
