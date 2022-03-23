@@ -5,6 +5,7 @@ function processInput(input : string[]) {
 }
 
 function dayFive(input : string[]) {
+    processInput(input);
 }
 
 const testInput = fs.readFileSync(
