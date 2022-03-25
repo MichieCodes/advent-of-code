@@ -1,7 +1,10 @@
 import fs from 'fs';
 import path from 'path'; 
 
-function processInput(input : string[]) {
+interface Pair {x: number, y: number};
+
+function processInput(input : string[]) : [Pair, Pair][] {
+  return [[{x: 0, y: 0}, {x: 0, y: 0}]];
 }
 
 function dayFive(input : string[]) {
