@@ -4,11 +4,25 @@ import path from 'path';
 interface Pair {x: number, y: number};
 
 function processInput(input : string[]) : [Pair, Pair][] {
-  return [[{x: 0, y: 0}, {x: 0, y: 0}]];
+    const coordinatePairs : [Pair, Pair][] = [];
+
+    for(let line of input) {
+        if(!line) continue;
+
+        const pairs = line.split(' -> ').map((pair) => {
+            const [x, y] = pair.split(',').map((num) => +num);
+
+            return {x, y};
+        });
+
+        coordinatePairs.push(pairs as [Pair, Pair]);
+    }
+
+    return coordinatePairs;
 }
 
 function dayFive(input : string[]) {
-    processInput(input);
+    const coordinatePairs = processInput(input);
 }
 
 const testInput = fs.readFileSync(
