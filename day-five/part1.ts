@@ -21,8 +21,13 @@ function processInput(input : string[]) : [Pair, Pair][] {
     return coordinatePairs;
 }
 
+function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
+
+}
+
 function dayFive(input : string[]) {
     const coordinatePairs = processInput(input);
+    findAdditionalPoints(coordinatePairs)
 }
 
 const testInput = fs.readFileSync(
