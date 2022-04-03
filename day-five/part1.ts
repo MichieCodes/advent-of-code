@@ -22,12 +22,35 @@ function processInput(input : string[]) : [Pair, Pair][] {
 }
 
 function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
+    return coordinatePairs.map((points) => {
+        let [pair1, pair2] = points;
 
+        const horizontalDifference = pair1.x - pair2.x; 
+        const verticalDifference = pair1.y - pair2.y; 
+
+        if(horizontalDifference) {
+            const pointCount = Math.abs(horizontalDifference) + 1;
+            const sign = horizontalDifference / (pointCount - 1);
+
+            return Array.from({length: pointCount}, (_, i) => (
+                {x: pair1.x + sign * i, y: pair1.y} as Pair
+            ));
+        } else if(verticalDifference) {
+            const pointCount = Math.abs(verticalDifference) + 1;
+            const sign = pointCount / (pointCount - 1);
+
+            return Array.from({length: pointCount}, (_, i) => (
+                {x: pair1.x, y: pair1.y + sign * i} as Pair
+            ));
+        }
+
+        return points;
+    });
 }
 
 function dayFive(input : string[]) {
     const coordinatePairs = processInput(input);
-    findAdditionalPoints(coordinatePairs)
+    const completePairLists = findAdditionalPoints(coordinatePairs)
 }
 
 const testInput = fs.readFileSync(
@@ -41,4 +64,4 @@ const mainInput = fs.readFileSync(
 ).split('\n'); 
 
 console.log(dayFive(testInput));
-console.log(dayFive(mainInput));
+// console.log(dayFive(mainInput));
