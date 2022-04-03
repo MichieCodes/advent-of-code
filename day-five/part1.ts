@@ -25,8 +25,8 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
 
-        const horizontalDifference = pair1.x - pair2.x; 
-        const verticalDifference = pair1.y - pair2.y; 
+        const horizontalDifference = pair2.x - pair1.x; 
+        const verticalDifference = pair2.y - pair1.y; 
 
         if(horizontalDifference) {
             const pointCount = Math.abs(horizontalDifference) + 1;
@@ -50,7 +50,9 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
 
 function dayFive(input : string[]) {
     const coordinatePairs = processInput(input);
-    const completePairLists = findAdditionalPoints(coordinatePairs)
+    const completePairLists = findAdditionalPoints(coordinatePairs);
+
+    return completePairLists;
 }
 
 const testInput = fs.readFileSync(
