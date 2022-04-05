@@ -21,12 +21,16 @@ function processInput(input : string[]) : [Pair, Pair][] {
     return coordinatePairs;
 }
 
+//TODO: Fix fractional points
 function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
 
         const horizontalDifference = pair2.x - pair1.x; 
         const verticalDifference = pair2.y - pair1.y; 
+
+        if(horizontalDifference && verticalDifference)
+            return undefined;
 
         if(horizontalDifference) {
             const pointCount = Math.abs(horizontalDifference) + 1;
@@ -45,7 +49,7 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
         }
 
         return points;
-    });
+    }).filter((points) => points);
 }
 
 function dayFive(input : string[]) {
