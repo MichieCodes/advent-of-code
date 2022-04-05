@@ -21,6 +21,7 @@ function processInput(input : string[]) : [Pair, Pair][] {
     return coordinatePairs;
 }
 
+//TODO: Fix fractional points
 function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
