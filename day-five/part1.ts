@@ -21,7 +21,6 @@ function processInput(input : string[]) : [Pair, Pair][] {
     return coordinatePairs;
 }
 
-//TODO: Fix fractional points
 function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
@@ -41,7 +40,7 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
             ));
         } else if(verticalDifference) {
             const pointCount = Math.abs(verticalDifference) + 1;
-            const sign = pointCount / (pointCount - 1);
+            const sign = verticalDifference / (pointCount - 1);
 
             return Array.from({length: pointCount}, (_, i) => (
                 {x: pair1.x, y: pair1.y + sign * i} as Pair
