@@ -51,6 +51,10 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     }).filter((points) => points);
 }
 
+function findOverlap(coordinatePairs : Pair[][]) {
+
+}
+
 function dayFive(input : string[]) {
     const coordinatePairs = processInput(input);
     const completePairLists = findAdditionalPoints(coordinatePairs);
