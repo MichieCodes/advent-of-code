@@ -73,4 +73,4 @@ const mainInput = fs.readFileSync(
 ).split('\n'); 
 
 console.log(dayFive(testInput));
-// console.log(dayFive(mainInput));
+console.log(dayFive(mainInput));
