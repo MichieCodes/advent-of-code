@@ -51,6 +51,7 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     }).filter((points) => points);
 }
 
+// TODO: find points that overlap each other
 function findOverlap(coordinatePairs : Pair[][]) {
 
 }
