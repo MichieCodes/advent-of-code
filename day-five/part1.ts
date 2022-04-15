@@ -54,8 +54,9 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
 // TODO: find points that overlap each other
 function findOverlap(coordinatePairs : Pair[][]) {
     // loop over points
-    // if we have seen point before increment
+    // if we have seen point before, increment
     // use frequency map
+    // return count number of pairs where frequency > 2
 }
 
 function dayFive(input : string[]) {
