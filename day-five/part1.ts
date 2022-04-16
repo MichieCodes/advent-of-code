@@ -21,7 +21,7 @@ function processInput(input : string[]) : [Pair, Pair][] {
     return coordinatePairs;
 }
 
-function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) : Pair[][] {
+function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
 
@@ -48,7 +48,7 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) : Pair[][] {
         }
 
         return points;
-    }).filter((points) => points);
+    }).filter((points) => points) as Pair[][];
 }
 
 function findOverlap(coordinatePairs : Pair[][]) {
@@ -60,7 +60,7 @@ function findOverlap(coordinatePairs : Pair[][]) {
             const key = pairToString(pair);
             let frequency = frequencyMap.get(key) || 0;
 
-            if(frequency === 0)
+            if(frequency === 1)
                 overlapCount++;
 
             frequencyMap.set(key, ++frequency);
@@ -75,8 +75,8 @@ function pairToString(pair : Pair) {
 }
 
 function dayFive(input : string[]) {
-    const coordinatePairs : [Pair, Pair][] = processInput(input);
-    const completePairLists : Pair[][] = findAdditionalPoints(coordinatePairs);
+    const coordinatePairs = processInput(input);
+    const completePairLists = findAdditionalPoints(coordinatePairs);
     const overlapCount = findOverlap(completePairLists);
 
     return overlapCount;
