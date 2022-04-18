@@ -13,15 +13,15 @@ function processInput(input : string[]) : [Pair, Pair][] {
             const [x, y] = pair.split(',').map((num) => +num);
 
             return {x, y};
-        });
+        }) as [Pair, Pair];
 
-        coordinatePairs.push(pairs as [Pair, Pair]);
+        coordinatePairs.push(pairs);
     }
 
     return coordinatePairs;
 }
 
-function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
+function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) : Pair[][] {
     return coordinatePairs.map((points) => {
         let [pair1, pair2] = points;
 
@@ -48,7 +48,7 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) {
         }
 
         return points;
-    }).filter((points) => points) as Pair[][];
+    }).filter((points) => points);
 }
 
 function findOverlap(coordinatePairs : Pair[][]) {
