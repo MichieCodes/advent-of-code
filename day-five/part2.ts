@@ -28,13 +28,20 @@ function findAdditionalPoints(coordinatePairs : [Pair, Pair][]) : Pair[][] {
         const horizontalDifference = pair2.x - pair1.x; 
         const verticalDifference = pair2.y - pair1.y; 
 
-        if(horizontalDifference && verticalDifference)
-            // return array of points across the diagonal
-            // check if horizontal & vertical match
-            // +/-1 from x, y to form diagonal
+        if(horizontalDifference && verticalDifference) {
             // pointCountH, pointCountV
+            const pointCountH = Math.abs(horizontalDifference) + 1;
+            const pointCountV = Math.abs(verticalDifference) + 1;
+
+            // check if horizontal & vertical match
+            if(pointCountH != pointCountV)
+                return undefined;
+
             // signH, signV
+            // +/-1 from x, y to form diagonal
+            // return array of points across the diagonal
             return undefined;
+        }
 
         if(horizontalDifference) {
             const pointCount = Math.abs(horizontalDifference) + 1;
